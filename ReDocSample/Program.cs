@@ -31,21 +31,22 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsProduction())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint(
-            "/swagger/v1/swagger.json", 
-            "Swagger Demo Documentation v1"
-            );
-    });
-
-    app.UseReDoc(options =>
-    {
-        options.DocumentTitle = "Swagger Demo Documentation";
-        options.SpecUrl = "/swagger/v1/swagger.json";
-    });
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint(
+        "/swagger/v1/swagger.json",
+        "Swagger Demo Documentation v1"
+        );
+});
+
+app.UseReDoc(options =>
+{
+    options.DocumentTitle = "Swagger Demo Documentation";
+    options.SpecUrl = "/swagger/v1/swagger.json";
+});
 
 app.UseHttpsRedirection();
 
