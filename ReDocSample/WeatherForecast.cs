@@ -1,5 +1,8 @@
 namespace ReDocSample
 {
+    /// <summary>
+    /// Weather Forecast
+    /// </summary>
     public class WeatherForecast
     {
         /// <summary>

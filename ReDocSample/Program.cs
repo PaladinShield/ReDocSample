@@ -2,6 +2,12 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.ConfigureKestrel((context, serverOptions) =>
+{
+    var kestrelSection = context.Configuration.GetSection("Kestrel");
+
+    serverOptions.Configure(kestrelSection);
+});
 // Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
