@@ -1,4 +1,4 @@
-namespace ReDocSample
+ï»¿namespace ReDocSample
 {
     /// <summary>
     /// Weather Forecast
@@ -6,22 +6,22 @@ namespace ReDocSample
     public class WeatherForecast
     {
         /// <summary>
-        /// ¤é´Á
+        /// æ—¥æœŸ
         /// </summary>
         public DateTime Date { get; set; }
 
         /// <summary>
-        /// Äá¤ó
+        /// æ”æ°
         /// </summary>
         public int TemperatureC { get; set; }
 
         /// <summary>
-        /// µØ¤ó
+        /// è¯æ°
         /// </summary>
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 
         /// <summary>
-        /// ºK­n
+        /// æ‘˜è¦
         /// </summary>
         public string? Summary { get; set; }
     }
