@@ -2,11 +2,9 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.ConfigureKestrel((context, serverOptions) =>
+builder.WebHost.UseKestrel(serverOptions =>
 {
-    var kestrelSection = context.Configuration.GetSection("Kestrel");
-
-    serverOptions.Configure(kestrelSection);
+    serverOptions.ListenAnyIP(5001);
 });
 // Add services to the container.
 builder.Services.AddControllers();
