@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Runtime.CompilerServices;
 
 namespace ReDocSample.Controllers;
 
@@ -42,7 +43,7 @@ public class WeatherForecastController : ControllerBase
     OperationId = "Get",
     Tags = new[] { "WeatherForecast" })]
     [SwaggerResponse(200, "The random weather forecasts", typeof(WeatherForecast))]
-    public IEnumerable<WeatherForecast> Get()
+    public IEnumerable<WeatherForecast> Get([FromQuery] WeatherForecastRequest request)
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
