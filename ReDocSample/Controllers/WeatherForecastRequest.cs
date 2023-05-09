@@ -15,12 +15,16 @@ namespace ReDocSample.Controllers
         [Required]
         public string Name { get; set; }
 
+        /// <summary>
+        /// 順序
+        /// </summary>
         [MaxLength(5)]
         public List<long> Seq { get; set; }
 
         /// <summary>
-        /// 測        
+        /// 測
         /// <remarks>
+        /// 
         /// Sample request:
         /// 
         ///     POST /Todo
