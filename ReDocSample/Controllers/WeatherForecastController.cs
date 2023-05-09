@@ -43,6 +43,7 @@ public class WeatherForecastController : ControllerBase
     OperationId = "Get",
     Tags = new[] { "WeatherForecast" })]
     [SwaggerResponse(200, "The random weather forecasts", typeof(WeatherForecast))]
+    [Produces("application/json")]
     public IEnumerable<WeatherForecast> Get([FromBody] WeatherForecastRequest request)
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
