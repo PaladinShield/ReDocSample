@@ -1,4 +1,5 @@
 ﻿using Microsoft.OpenApi.Models;
+using Prometheus;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,6 +52,10 @@ app.UseReDoc(options =>
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseHttpMetrics();
+// Make sure these calls are made before the call to UseEndPoints.
+app.UseMetricServer();
 
 app.MapControllers();
 
