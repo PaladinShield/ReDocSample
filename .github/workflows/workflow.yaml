@@ -51,7 +51,7 @@ jobs:
 
     steps:
       - name: Trigger Azure DevOps Pipeline
-        uses: Azure/pipelines@v1
+        uses: Azure/pipelines@v1.2
         with:
           azure-devops-project-url: '${{ secrets.AZURE_DEVOPS_PROJECT_URL }}'
           azure-pipeline-name: 'ReDoc-CD'
