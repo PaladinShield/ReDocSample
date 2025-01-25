@@ -12,6 +12,10 @@ jobs:
     runs-on: arc-runner-set
     
     steps:
+    - name: Save PR number
+      env:
+        EVENT_NUMBER: ${{ github.event.number }}
+    
     - uses: actions/checkout@v4
 
     -
@@ -37,7 +41,7 @@ jobs:
         context: .
         builder: ${{ steps.buildx.outputs.name }}
         push: true
-        tags: 'k8s/redoc:${{ github.event.number }},k8s/redoc:latest,release/redoc:${{ github.event.number }},release/redoc:latest'
+        tags: 'k8s/redoc:$EVENT_NUMBER,k8s/redoc:latest,release/redoc:$EVENT_NUMBER,release/redoc:latest'
 
     #- name: Setup .NET Core
     #  uses: actions/setup-dotnet@v1
