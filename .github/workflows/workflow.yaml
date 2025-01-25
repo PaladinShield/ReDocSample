@@ -5,10 +5,12 @@ on:
     branches:
     - main
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: arc-runner-set
     
     steps:
     - uses: actions/checkout@v1
