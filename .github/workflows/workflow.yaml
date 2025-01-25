@@ -58,6 +58,16 @@ jobs:
           azure-devops-token: '${{ secrets.AZURE_DEVOPS_TOKEN }}'
           azure-pipeline-variables: '{"GITHUB_RUN_ID": "${{ github.run_id }}", "GITHUB_RUN_ATTEMPT": "${{ github.run_attempt }}"}'
 
+      - name: Create release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+        run: |
+          gh release create "${{ env.run_id }}" \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="${GITHUB_REPOSITORY#*/} ${{ env.run_id }}" \
+              --generate-notes
+
     #- name: Setup .NET Core
     #  uses: actions/setup-dotnet@v1
     #  with:
