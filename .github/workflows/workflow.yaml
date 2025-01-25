@@ -11,7 +11,12 @@ jobs:
   build:
     runs-on: arc-runner-set
     
-    steps:    
+    steps:
+    - 
+      name: set output
+      id: set_output
+      run: echo "run_id=${{ github.event.workflow_run.id }}" >> $GITHUB_ENV
+     
     - uses: actions/checkout@v4
 
     -
@@ -37,7 +42,7 @@ jobs:
         context: .
         builder: ${{ steps.buildx.outputs.name }}
         push: true
-        tags: 'k8s/redoc:${{ github.event.workflow_run.id }},k8s/redoc:latest,release/redoc:${{ github.event.workflow_run.id }},release/redoc:latest'
+        tags: 'k8s/redoc:${{ env.run_id }},k8s/redoc:latest,release/redoc:${{ env.run_id }},release/redoc:latest'
 
     #- name: Setup .NET Core
     #  uses: actions/setup-dotnet@v1
