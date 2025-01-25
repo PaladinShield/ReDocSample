@@ -43,7 +43,7 @@ jobs:
         file: ./ReDocSample/Dockerfile
         builder: ${{ steps.buildx.outputs.name }}
         push: true
-        tags: 'k8s/redoc:${{ env.run_id }},k8s/redoc:latest,release/redoc:${{ env.run_id }},release/redoc:latest'
+        tags: '${{ vars.REGISTRY_URL }}/k8s/redoc:${{ env.run_id }},${{ vars.REGISTRY_URL }}/k8s/redoc:latest,${{ vars.REGISTRY_URL }}/release/redoc:${{ env.run_id }},${{ vars.REGISTRY_URL }}/release/redoc:latest'
 
   trigger_azure_pipeline:
     runs-on: arc-runner-set
