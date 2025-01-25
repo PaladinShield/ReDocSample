@@ -11,15 +11,7 @@ jobs:
     #runs-on: ubuntu-latest
     runs-on: arc-runner-set
     
-    steps:
-    - uses: actions/create-github-app-token@v1
-      name: Generate access token
-      id: generate-access-token
-      with:
-        app-id: ${{ vars.GH_APP_ID }}
-        private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
-        skip-token-revoke: true
-    
+    steps:    
     - uses: actions/checkout@v1
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
