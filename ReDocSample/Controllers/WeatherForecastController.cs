@@ -44,7 +44,35 @@ public class WeatherForecastController : ControllerBase
     Tags = new[] { "WeatherForecast" })]
     [SwaggerResponse(200, "The random weather forecasts", typeof(WeatherForecast))]
     [Produces("application/json")]
-    public IEnumerable<WeatherForecast> Get([FromBody] WeatherForecastRequest request)
+    public IEnumerable<WeatherForecast> Get()
+    {
+        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        {
+            Date = DateTime.Now.AddDays(index),
+            TemperatureC = Random.Shared.Next(-20, 55),
+            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+        })
+        .ToArray();
+    }
+
+    /// <summary>
+    /// Return 5 random weather forecasts
+    /// </summary>
+    /// <remarks>
+    /// This endpoint will return 5 days of weather forecasts with random temperatures in celcius.
+    /// </remarks>
+    /// <returns>5 Weather forecasts</returns>
+    /// <response code="200">Returns the weather forecasts</response>
+    [HttpPost(Name = "GetWeatherForecast")]
+    //[ProducesResponseType(StatusCodes.Status200OK)]
+    [SwaggerOperation(
+    Summary = "Get Weather Forecast",
+    Description = "This endpoint will return 5 days of weather forecasts with random temperatures in celcius.",
+    OperationId = "Get",
+    Tags = new[] { "WeatherForecast" })]
+    [SwaggerResponse(200, "The random weather forecasts", typeof(WeatherForecast))]
+    [Produces("application/json")]
+    public IEnumerable<WeatherForecast> Post([FromBody] WeatherForecastRequest request)
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
