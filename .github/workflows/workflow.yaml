@@ -11,16 +11,12 @@ jobs:
   build:
     runs-on: arc-runner-set
 
-    outputs:
-      run_id: ${{ steps.set_output.outputs.run_id }}
-
     steps:
     - 
       name: set output
       id: set_output
       run: |
         echo "run_id=${{github.run_id}}.${{ github.run_attempt }}" >> $GITHUB_ENV
-        echo "run_id=${{github.run_id}}.${{ github.run_attempt }}" >> "$GITHUB_OUTPUT"
      
     - uses: actions/checkout@v4
 
@@ -73,7 +69,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
         run: |
-          gh release create "${{ needs.build.outputs.run_id }}" \
+          gh release create "${{github.run_id}}.${{ github.run_attempt }}" \
               --repo="$GITHUB_REPOSITORY" \
-              --title="${GITHUB_REPOSITORY#*/} ${{ needs.build.outputs.run_id }}" \
+              --title="${GITHUB_REPOSITORY#*/} ${{github.run_id}}.${{ github.run_attempt }}" \
               --generate-notes
