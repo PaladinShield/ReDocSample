@@ -51,7 +51,7 @@ jobs:
           ${{ vars.REGISTRY_URL }}/k8s/redoc:${{ env.run_id }}
           ${{ vars.REGISTRY_URL }}/k8s/redoc:latest
           ${{ vars.REGISTRY_URL }}/release/redoc:${{ env.run_id }}
-          ${{ vars.REGISTRY_URL }}/release/redoc:latest'
+          ${{ vars.REGISTRY_URL }}/release/redoc:latest
 
   create_release:
     runs-on: ubuntu-latest
