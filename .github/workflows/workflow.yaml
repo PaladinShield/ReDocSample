@@ -18,7 +18,9 @@ jobs:
     - 
       name: set output
       id: set_output
-      run: echo "run_id=${{github.run_id}}.${{ github.run_attempt }}" >> $GITHUB_ENV
+      run: |
+        echo "run_id=${{github.run_id}}.${{ github.run_attempt }}" >> $GITHUB_ENV
+        echo "run_id=${{github.run_id}}.${{ github.run_attempt }}" >> $GITHUB_OUTPUT
      
     - uses: actions/checkout@v4
 
