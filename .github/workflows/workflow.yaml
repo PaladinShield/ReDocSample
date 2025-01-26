@@ -10,7 +10,10 @@ on:
 jobs:
   build:
     runs-on: arc-runner-set
-    
+
+    outputs:
+      run_id: ${{ steps.set_output.outputs.run_id }}
+
     steps:
     - 
       name: set output
@@ -68,41 +71,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
         run: |
-          gh release create "${{ env.run_id }}" \
+          gh release create "${{ needs.build.outputs.run_id }}" \
               --repo="$GITHUB_REPOSITORY" \
-              --title="${GITHUB_REPOSITORY#*/} ${{ env.run_id }}" \
+              --title="${GITHUB_REPOSITORY#*/} ${{ needs.build.outputs.run_id }}" \
               --generate-notes
-
-    #- name: Setup .NET Core
-    #  uses: actions/setup-dotnet@v1
-    #  with:
-    #    dotnet-version: '8.0.x'
-    #- name: Dotnet Publish
-    #  run: dotnet publish ReDocSample -c Release -o deploy
-    # - name: Stop Service
-    #   uses: garygrossgarten/github-action-ssh@0.7.0
-    #   with:
-    #     command: |
-    #       sudo systemctl stop redoc.service
-    #     host: ${{ secrets.REMOTE_HOST }}
-    #     username: ${{ secrets.REMOTE_USER }}
-    #     privatekey: ${{ secrets.REMOTE_SSH_KEY }}
-    # - name: deploy file
-    #   uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-    #   with:
-    #     username: ${{ secrets.REMOTE_USER }}
-    #     server: ${{ secrets.REMOTE_HOST }}
-    #     ssh_private_key: ${{ secrets.REMOTE_SSH_KEY }}
-    #     local_path: './deploy/*'
-    #     remote_path: ${{ secrets.REMOTE_TARGET }}
-    #     sftpArgs: '-o ConnectTimeout=5'
-    # - name: Restart Nginx and Start Service
-    #   uses: garygrossgarten/github-action-ssh@0.7.0
-    #   with:
-    #     command: |
-    #       sudo systemctl nginx -t
-    #       sudo systemctl restart nginx
-    #       sudo systemctl start redoc.service
-    #     host: ${{ secrets.REMOTE_HOST }}
-    #     username: ${{ secrets.REMOTE_USER }}
-    #     privatekey: ${{ secrets.REMOTE_SSH_KEY }}
