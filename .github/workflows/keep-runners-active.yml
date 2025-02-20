@@ -6,6 +6,6 @@ on:
 
 jobs:
   keep-alive:
-    runs-on: [self-hosted, your-runner-label]
+    runs-on: [arc-runner-set]
     steps:
       - run: echo "Keeping runner scale set active"
