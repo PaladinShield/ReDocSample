@@ -1,0 +1,11 @@
+name: Keep Runners Active
+
+on:
+  schedule:
+    - cron: '0 * * * *' # 每小時運行一次
+
+jobs:
+  keep-alive:
+    runs-on: [self-hosted, your-runner-label]
+    steps:
+      - run: echo "Keeping runner scale set active"
